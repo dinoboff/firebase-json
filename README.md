@@ -2,11 +2,11 @@
 
 Parser for Firebase rules JSON files.
 
-It supersedes [RFC 7159] to allow:
+It supersedes [RFC 7159] with those additions:
 
-- Multi line comments.
-- Single line comments.
-- Multi line string.
+- support multi line ("/* [...] */") and single line ("// [...]") comments;
+- support multi line strings (without escaping the line feed);
+- and disallow duplicate keys in objects.
 
 
 ## Example

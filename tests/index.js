@@ -49,6 +49,13 @@ const SINGLE_LINE_COMMENT = `// start
 
 const MULTI_LINE_STRING = '"one\ntwo\nthree"';
 
+const SAME_KEY = `{
+  "foo": 1,
+  "bar": 2,
+  "bar": 3,
+  "baz": 4
+}`
+
 describe('firebase-json', function() {
   const packagePath = path.join(__dirname, '../package.json');
 
@@ -81,6 +88,10 @@ describe('firebase-json', function() {
 
     it('should parse multi line string', function() {
       expect(json.parse(MULTI_LINE_STRING)).to.deep.equal('one\ntwo\nthree');
+    });
+
+    it('should throw on duplicated keys', function() {
+      expect(() => json.parse(SAME_KEY)).to.throw();
     });
 
   });
