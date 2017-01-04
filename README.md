@@ -92,3 +92,4 @@ Copyright (c) 2017 Damien Lebrun
 [strip-json-comments]: https://github.com/sindresorhus/strip-json-comments
 [Firebase's bolt]: https://github.com/firebase/bolt
 [firebase-tools]: https://github.com/firebase/firebase-tools
+[Pegjs]: https://pegjs.org/
