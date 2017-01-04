@@ -1,7 +1,7 @@
 // JSON Grammar
 // ============
 //
-// Based on the grammar from RFC 7159 [1] and Pegjs JSON grammar definition:
+// Based on RFC 7159 [1] and Pegjs JSON grammar definition:
 // 
 // 
 //    https://github.com/pegjs/pegjs/blob/647d4881473afb6af3968032ad9b9f01e4254581/examples/json.pegjs
