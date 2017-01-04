@@ -17,7 +17,6 @@ const PLAIN_ERROR = `{
   baz: [2, 3]
 }`;
 
-
 const MULTI_LINE_COMMENT = `/*start*/
 {
   /**
@@ -54,7 +53,7 @@ const SAME_KEY = `{
   "bar": 2,
   "bar": 3,
   "baz": 4
-}`
+}`;
 
 describe('firebase-json', function() {
   const packagePath = path.join(__dirname, '../package.json');
@@ -112,7 +111,7 @@ describe('firebase-json', function() {
     it('should load json content asynchronously', function() {
       return json.load(packagePath).then(
         pkg => expect(pkg.name).to.equal('firebase-json')
-      )
+      );
     });
 
   });

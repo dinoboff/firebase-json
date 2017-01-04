@@ -7,8 +7,8 @@ const parser = require('./src/firebase-json.js');
  * Create a SyntaxError with fileName, lineNumber, columnNumber and stack
  * pointing to the syntax error in the the json file.
  *
- * @param  {Error}  original Pegjs syntax error.
- * @param  {string} filname  JSON file name
+ * @param  {Error}  original  Pegjs syntax error
+ * @param  {string} fileName  JSON file name
  * @return {Error}
  */
 function error(original, fileName) {
@@ -41,7 +41,8 @@ function error(original, fileName) {
 /**
  * Parse JSON-like encoded string.
  *
- * @param  {string} json Content to decode
+ * @param  {string} json       Content to decode
+ * @param  {string} [fileName] JSON file name (for error messages)
  * @return {any}
  */
 exports.parse = function(json, fileName) {
