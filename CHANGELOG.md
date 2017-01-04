@@ -1,3 +1,19 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/dinoboff/firebase-json/compare/v0.1.0...v0.2.0) (2017-01-04)
+
+
+### Features
+
+* disallow duplicate keys in objects ([056adcf](https://github.com/dinoboff/firebase-json/commit/056adcf))
+* implement better parsing error message ([af99779](https://github.com/dinoboff/firebase-json/commit/af99779))
+
+
+### BREAKING CHANGES
+
+* `parse(json)` throws a builtin SyntaxError instead of the Pegjs one. Instead of a location property, the error includes the lineNumber and columnNumber property.
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/dinoboff/firebase-json/compare/08424be...v0.1.0) (2017-01-04)
 
