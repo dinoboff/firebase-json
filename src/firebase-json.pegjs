@@ -163,6 +163,7 @@ string "string"
 
 char
   = unescaped
+  / linefeed
   / escape
     sequence:(
         '"'

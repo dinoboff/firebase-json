@@ -79,7 +79,7 @@ describe('firebase-json', function() {
       });
     });
 
-    it.skip('should parse multi line string', function() {
+    it('should parse multi line string', function() {
       expect(json.parse(MULTI_LINE_STRING)).to.deep.equal('one\ntwo\nthree');
     });
 
