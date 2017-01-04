@@ -98,6 +98,10 @@ object
         var result = {};
 
         [head].concat(tail).forEach(function(element) {
+          if (result.hasOwnProperty(element.name)) {
+            error('"' + element.name + '" occurs multiple times.');
+          }
+
           result[element.name] = element.value;
         });
 
