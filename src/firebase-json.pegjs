@@ -21,6 +21,7 @@
 // MIT License
 // 
 // Copyright (c) 2010-2016 David Majda
+// Copyright (c) 2017 Damien Lebrun
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,16 +45,32 @@
 // ----- 2. JSON Grammar -----
 
 JSON_text
-  = ws value:value ws { return value; }
+  = _ value:value _ { return value; }
 
-begin_array     = ws "[" ws
-begin_object    = ws "{" ws
-end_array       = ws "]" ws
-end_object      = ws "}" ws
-name_separator  = ws ":" ws
-value_separator = ws "," ws
+begin_array     = _ "[" _
+begin_object    = _ "{" _
+end_array       = _ "]" _
+end_object      = _ "}" _
+name_separator  = _ ":" _
+value_separator = _ "," _
+
+_ "skip" = ws comment* ws
 
 ws "whitespace" = [ \t\n\r]*
+
+linefeed = unixlf / winlf
+unixlf = "\n"
+winlf = "\r\n"
+
+comment
+  = multiLineComment
+  / singleLineComment
+
+multiLineComment
+  = ws "/*" (!"*/" .)* "*/"
+
+singleLineComment
+  = ws "//" (!linefeed .)*
 
 // ----- 3. Values -----
 

@@ -24,19 +24,24 @@ const MULTI_LINE_COMMENT = `/*start*/
    * header
    */
   "foo"/* key */: /* value */ "bar" /* value */, /* trail */
-  "bar": *array*/ [ /*item*/ 1, /*item*/ 2 /*item*/ ] /*array*/
+  "baz": /*array*/ [ /*item*/ 2, /*item*/ 3 /*item*/ ] /*array*/
 } /*end*/`;
 
 const SINGLE_LINE_COMMENT = `// start
-{
-  //
+{ //
   // header
   //
-  "foo" // key
-  : // value
-  "bar" // value
-  , // trail
-  "baz": 1
+  "foo"  // key
+  :      // value
+  "bar"  // value
+  ,
+  "baz":
+  // array
+  [
+       // item
+    2, // item
+    3  // item
+  ]
   //
   // footer
   //
@@ -60,16 +65,16 @@ describe('firebase-json', function() {
       expect(() => json.parse(PLAIN_ERROR)).to.throw();
     });
 
-    it.skip('should parse multi line comments', function() {
+    it('should parse multi line comments', function() {
       expect(json.parse(MULTI_LINE_COMMENT)).to.deep.equal({
-        foo: 'baz',
+        foo: 'bar',
         baz: [2, 3]
       });
     });
 
-    it.skip('should parse single line comments', function() {
+    it('should parse single line comments', function() {
       expect(json.parse(SINGLE_LINE_COMMENT)).to.deep.equal({
-        foo: 'baz',
+        foo: 'bar',
         baz: [2, 3]
       });
     });
