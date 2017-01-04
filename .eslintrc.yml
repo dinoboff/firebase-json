@@ -29,7 +29,7 @@ rules:
       classes: false
   node/no-unsupported-features:
     - error
-    - version: 6
+    - version: 4
   no-var:
     - error
   strict:
