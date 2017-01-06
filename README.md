@@ -96,6 +96,7 @@ Copyright (c) 2017 Damien Lebrun
 [RFC 7159]: http://tools.ietf.org/html/rfc7159
 [targaryen]: https://github.com/goldibex/targaryen
 [strip-json-comments]: https://github.com/sindresorhus/strip-json-comments
+[json5]: http://json5.org/
 [bolt]: https://github.com/firebase/bolt
 [firebase-tools]: https://github.com/firebase/firebase-tools
 [Pegjs]: https://pegjs.org/
