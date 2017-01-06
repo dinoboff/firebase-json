@@ -42,10 +42,71 @@
 // SOFTWARE.
 // 
 
+{
+  function expressionNode(expression) {
+    return {
+      type: 'ExpressionStatement',
+      expression: expression,
+      loc: loc()
+    };
+  }
+
+  function objectNode(properties) {
+    return {
+      type: 'ObjectExpression',
+      properties: properties == null ? [] : properties,
+      loc: loc()
+    };
+  }
+
+  function propertyNode(key, value) {
+    return {
+      type: 'Property',
+      key: key,
+      value: value,
+      loc: loc(),
+      kind: 'init'
+    };
+  }
+
+  function arrayNode(elements) {
+    return {
+      type: 'ArrayExpression',
+      elements: elements == null ? [] : elements,
+      loc: loc()
+    };
+  }
+
+  function literalNode(value) {
+    return {
+      type: 'Literal',
+      value: value,
+      raw: text(),
+      loc: loc()
+    };
+  }
+  
+  function loc() {
+    const pegLoc = location();
+    
+    return {
+      start: position(pegLoc.start),
+      end: position(pegLoc.end)
+    };
+  }
+  
+  function position(pegPosition) {
+    return {
+      line: pegPosition.line,
+      column: pegPosition.column - 1
+    };
+  }
+}
+
 // ----- 2. JSON Grammar -----
 
 JSON_text
-  = _ value:value _ { return value; }
+  = _ value:value _ { return expressionNode(value); }
 
 begin_array     = _ "[" _
 begin_object    = _ "{" _
@@ -83,60 +144,67 @@ value
   / number
   / string
 
-false = "false" { return false; }
-null  = "null"  { return null;  }
-true  = "true"  { return true;  }
+false = "false" { return literalNode(false); }
+null  = "null"  { return literalNode(null);  }
+true  = "true"  { return literalNode(true);  }
 
 // ----- 4. Objects -----
 
 object
   = begin_object
-    members:(
-      head:member
-      tail:(value_separator m:member { return m; })*
+    properties:(
+      head:property
+      tail:(value_separator m:property { return m; })*
       {
-        var result = {};
+        const properties = [head].concat(tail);
+        const foundKeys = {};
 
-        [head].concat(tail).forEach(function(element) {
-          if (result.hasOwnProperty(element.name)) {
-            error('"' + element.name + '" occurs multiple times.');
+        properties.forEach(prop => {
+          const name = prop.key.value;
+
+          if (foundKeys[name] === true) {
+            error(`'${name}' occurs multiples times.`);
           }
 
-          result[element.name] = element.value;
+          foundKeys[name] = true;
         });
 
-        return result;
+        return properties;
       }
     )?
     end_object
-    { return members !== null ? members: {}; }
+    { return objectNode(properties); }
 
-member
-  = name:key name_separator value:value {
-      return { name: name, value: value };
+property
+  = key:key name_separator value:value {
+      return propertyNode(key, value);
     }
 
 key
   = quotation_mark chars:(unescaped / escaped)* quotation_mark {
-    return chars.join("");
+    return literalNode(chars.join(""));
   }
 
 // ----- 5. Arrays -----
 
 array
   = begin_array
-    values:(
+    elements:(
       head:value
       tail:(value_separator v:value { return v; })*
-      { return [head].concat(tail); }
+      {
+        return [head].concat(tail);
+      }
     )?
     end_array
-    { return values !== null ? values : []; }
+    { return arrayNode(elements); }
 
 // ----- 6. Numbers -----
 
 number "number"
-  = minus? int frac? exp? { return parseFloat(text()); }
+  = minus? int frac? exp? {
+    return literalNode(parseFloat(text()));
+  }
 
 decimal_point
   = "."
@@ -168,7 +236,7 @@ zero
 // ----- 7. Strings -----
 
 string "string"
-  = quotation_mark chars:char* quotation_mark { return chars.join(""); }
+  = quotation_mark chars:char* quotation_mark { return literalNode(chars.join("")); }
 
 char
   = unescaped
