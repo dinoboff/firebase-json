@@ -1,3 +1,18 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/dinoboff/firebase-json/compare/v0.2.1...v0.3.0) (2017-01-06)
+
+
+### Bug Fixes
+
+* fix ast positions to use 0-indexed column ([02efe24](https://github.com/dinoboff/firebase-json/commit/02efe24))
+
+
+### Features
+
+* add `ast` to parse json to intermediary AST ([0082d19](https://github.com/dinoboff/firebase-json/commit/0082d19))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/dinoboff/firebase-json/compare/v0.2.0...v0.2.1) (2017-01-06)
 
