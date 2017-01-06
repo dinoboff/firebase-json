@@ -47,15 +47,15 @@
     return {
       type: 'ExpressionStatement',
       expression: expression,
-      loc: location()
-    }
+      loc: loc()
+    };
   }
 
   function objectNode(properties) {
     return {
       type: 'ObjectExpression',
       properties: properties == null ? [] : properties,
-      loc: location()
+      loc: loc()
     };
   }
 
@@ -64,7 +64,7 @@
       type: 'Property',
       key: key,
       value: value,
-      loc: location(),
+      loc: loc(),
       kind: 'init'
     };
   }
@@ -73,7 +73,7 @@
     return {
       type: 'ArrayExpression',
       elements: elements == null ? [] : elements,
-      loc: location()
+      loc: loc()
     };
   }
 
@@ -82,7 +82,23 @@
       type: 'Literal',
       value: value,
       raw: text(),
-      loc: location()
+      loc: loc()
+    };
+  }
+  
+  function loc() {
+    const pegLoc = location();
+    
+    return {
+      start: position(pegLoc.start),
+      end: position(pegLoc.end)
+    };
+  }
+  
+  function position(pegPosition) {
+    return {
+      line: pegPosition.line,
+      column: pegPosition.column - 1
     };
   }
 }

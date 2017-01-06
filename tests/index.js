@@ -67,9 +67,9 @@ describe('firebase-json', function() {
       expect(ast).to.have.property('expression');
       expect(ast).to.have.property('loc');
       expect(ast.loc.start.line).to.equal(1);
-      expect(ast.loc.start.column).to.equal(1);
+      expect(ast.loc.start.column).to.equal(0);
       expect(ast.loc.end.line).to.equal(1);
-      expect(ast.loc.end.column).to.equal(5);
+      expect(ast.loc.end.column).to.equal(4);
     });
 
     it('should parse object into an ObjectExpression node', function() {
