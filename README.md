@@ -91,7 +91,7 @@ Copyright (c) 2017 Damien Lebrun
 [RFC 7159]: http://tools.ietf.org/html/rfc7159
 [targaryen]: https://github.com/goldibex/targaryen
 [strip-json-comments]: https://github.com/sindresorhus/strip-json-comments
-[Firebase's bolt]: https://github.com/firebase/bolt
+[bolt]: https://github.com/firebase/bolt
 [firebase-tools]: https://github.com/firebase/firebase-tools
 [Pegjs]: https://pegjs.org/
 [Damien Lebrun]: https://github.com/dinoboff
