@@ -112,9 +112,14 @@ object
     { return members !== null ? members: {}; }
 
 member
-  = name:string name_separator value:value {
+  = name:key name_separator value:value {
       return { name: name, value: value };
     }
+
+key
+  = quotation_mark chars:(unescaped / escaped)* quotation_mark {
+    return chars.join("");
+  }
 
 // ----- 5. Arrays -----
 
@@ -168,7 +173,10 @@ string "string"
 char
   = unescaped
   / linefeed
-  / escape
+  / escaped
+
+escaped
+  = escape
     sequence:(
         '"'
       / "\\"

@@ -93,6 +93,10 @@ describe('firebase-json', function() {
       expect(() => json.parse(SAME_KEY)).to.throw();
     });
 
+    it('should throw on multiline keys', function() {
+      expect(() => json.parse('{"foo\nbar": 1}')).to.throw();
+    });
+
     it('should report the error line and column number', function() {
       expect(() => json.parse('foo')).to.throw(/Line 1, column 1:/);
       expect(() => json.parse(`{
