@@ -39,6 +39,52 @@ function error(original, fileName) {
 }
 
 /**
+ * Evaluate AST node to a value.
+ *
+ * @param  {object} node Node to evaluate
+ * @return {any}
+ */
+function astValue(node) {
+
+  switch (node.type) {
+
+  case 'ExpressionStatement':
+    return astValue(node.expression);
+
+  case 'ObjectExpression':
+    return node.properties.reduce(
+      (obj, prop) => Object.assign(obj, {[prop.key.value]: astValue(prop.value)}),
+      {}
+    );
+
+  case 'ArrayExpression':
+    return node.elements.map(element => astValue(element));
+
+  case 'Literal':
+    return node.value;
+
+  default:
+    throw new Error(`Unexpected ast node type: ${node.type}`);
+
+  }
+}
+
+/**
+ * Parse JSON-like encoded string into an ast.
+ *
+ * @param  {string} json       Content to decode
+ * @param  {string} [fileName] JSON file name (for error messages)
+ * @return {any}
+ */
+exports.ast = function(json, fileName) {
+  try {
+    return parser.parse(json.toString());
+  } catch (e) {
+    throw error(e, fileName);
+  }
+};
+
+/**
  * Parse JSON-like encoded string.
  *
  * @param  {string} json       Content to decode
@@ -46,11 +92,9 @@ function error(original, fileName) {
  * @return {any}
  */
 exports.parse = function(json, fileName) {
-  try {
-    return parser.parse(json.toString());
-  } catch (e) {
-    throw error(e, fileName);
-  }
+  const ast = exports.ast(json, fileName);
+
+  return astValue(ast);
 };
 
 /**

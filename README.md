@@ -62,6 +62,11 @@ npm install firebase-json
 
     Read the file synchronously and parse its firebase-json encoded content.
 
+- `ast(json: rules): {type: string, expression: object, loc: object}`
+
+   Parse the firebase-json encoded string into an to intermediary AST. It uses
+   the ESTree AST schema and returns an "ExpressionStatement" node.
+
 
 ## Tests
 
