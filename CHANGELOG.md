@@ -1,3 +1,13 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/dinoboff/firebase-json/compare/v0.2.0...v0.2.1) (2017-01-06)
+
+
+### Bug Fixes
+
+* disallow multi line object key ([eaa04e0](https://github.com/dinoboff/firebase-json/commit/eaa04e0))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/dinoboff/firebase-json/compare/v0.1.0...v0.2.0) (2017-01-04)
 
