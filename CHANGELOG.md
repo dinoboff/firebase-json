@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/dinoboff/firebase-json/compare/v0.3.0...v0.4.0) (2017-06-25)
+
+
+### Features
+
+* allows trailing commas in object/array ([1b78268](https://github.com/dinoboff/firebase-json/commit/1b78268)), closes [#6](https://github.com/dinoboff/firebase-json/issues/6)
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/dinoboff/firebase-json/compare/v0.2.1...v0.3.0) (2017-01-06)
 
