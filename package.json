@@ -1,6 +1,6 @@
 {
   "name": "firebase-json",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Parser for JSON based Firebase rules files",
   "main": "index.js",
   "files": [
