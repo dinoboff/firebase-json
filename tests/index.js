@@ -154,6 +154,26 @@ describe('firebase-json', function() {
       }`)).to.throw(/Line 4, column 11:/);
     });
 
+    it('should accept trailing comma in objects', function() {
+      expect(json.parse('{"foo": 1}')).to.deep.equal({foo: 1});
+      expect(json.parse('{"foo": 1,}')).to.deep.equal({foo: 1});
+      expect(json.parse('{"foo": 1, "bar": 2}')).to.deep.equal({foo: 1, bar: 2});
+      expect(json.parse('{"foo": 1, "bar": 2,}')).to.deep.equal({foo: 1, bar: 2});
+      expect(() => json.parse('{,}')).to.throw();
+      expect(() => json.parse('{"foo": 1,,}')).to.throw();
+      expect(() => json.parse('{"foo": 1, bar: 2,,}')).to.throw();
+    });
+
+    it('should accept trailing comma in array', function() {
+      expect(json.parse('[1]')).to.deep.equal([1]);
+      expect(json.parse('[1,]')).to.deep.equal([1]);
+      expect(json.parse('[1, 2]')).to.deep.equal([1, 2]);
+      expect(json.parse('[1, 2,]')).to.deep.equal([1, 2]);
+      expect(() => json.parse('[,]')).to.throw();
+      expect(() => json.parse('[1,,]')).to.throw();
+      expect(() => json.parse('[1,2,,]')).to.throw();
+    });
+
   });
 
   describe('load', function() {

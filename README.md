@@ -6,7 +6,8 @@ It supersedes [RFC 7159] with those additions:
 
 - support multi line ("/* [...] */") and single line ("// [...]") comments;
 - support multi line strings (without escaping the line feed);
-- and disallow duplicate keys in objects.
+- disallow duplicate keys in objects;
+- and allow trailing commas in objects and array.
 
 
 ## Example

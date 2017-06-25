@@ -155,6 +155,7 @@ object
     properties:(
       head:property
       tail:(value_separator m:property { return m; })*
+      value_separator?
       {
         const properties = [head].concat(tail);
         const foundKeys = {};
@@ -192,6 +193,7 @@ array
     elements:(
       head:value
       tail:(value_separator v:value { return v; })*
+      value_separator?
       {
         return [head].concat(tail);
       }
